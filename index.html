@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquaroid - Under Construction</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Modern Reset and Theme Tokens */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-color: #040814;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.65);
+            --accent-glow: rgba(0, 212, 255, 0.15);
+            --accent-blue: #00d4ff;
+            --accent-purple: #7928ca;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-sans: 'Outfit', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Futuristic Background Glows */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(4, 8, 20, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+            animation: pulse-glow 8s infinite alternate ease-in-out;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(121, 40, 202, 0.1) 0%, rgba(4, 8, 20, 0) 70%);
+            top: 20%;
+            right: 10%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Container Layout */
+        .container {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Logo Area */
+        .logo-wrapper {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 240px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.25));
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(1deg);
+            filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.45));
+        }
+
+        /* Status Badge */
+        .status-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent-blue);
+            animation: blink 1.8s infinite;
+        }
+
+        /* Typography styling */
+        h1 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Subtle animated divider */
+        .divider {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer styling */
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.35);
+            font-family: var(--font-sans);
+            letter-spacing: 0.05em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: opacity 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0% {
+                width: 500px;
+                height: 500px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 700px;
+                height: 700px;
+                opacity: 1.2;
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+                box-shadow: 0 0 15px var(--accent-blue);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .logo {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-wrapper">
+            <img src="aquaroid_simple.png" alt="Aquaroid Logo" class="logo">
+        </div>
+
+        <!-- Status Badge -->
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Under Construction
+        </div>
+
+        <!-- Main Heading -->
+        <h1>Something is Flowing</h1>
+        
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Subtext -->
+        <p>
+            We are working hard to bring you the new digital experience of Aquaroid.<br>
+            Please stay tuned as we prepare to launch.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div>&copy; 2026 AQUAROID. All rights reserved.</div>
+        <div style="font-size: 0.78rem; opacity: 0.8;">Powered by Seculine Co., Ltd.</div>
+        <div style="font-size: 0.78rem;"><a href="http://www.secu-line.com" target="_blank" rel="noopener noreferrer">www.secu-line.com</a></div>
+    </footer>
+
+</body>
+</html>
